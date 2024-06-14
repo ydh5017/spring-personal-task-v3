@@ -29,7 +29,8 @@ public class NewsfeedService {
 
     @Transactional
     public NewsfeedResponseDto save(NewsfeedRequestDto requestDto, User user) {
-        Newsfeed newsfeed = newsfeedRepository.save(requestDto.toEntity(user));
+        Newsfeed newsfeed = new Newsfeed(requestDto.getTitle(), requestDto.getDescription(), user);
+        newsfeedRepository.save(newsfeed);
 
         // 파일 업로드
         fileService.saveFiles(newsfeed, requestDto.getFiles());

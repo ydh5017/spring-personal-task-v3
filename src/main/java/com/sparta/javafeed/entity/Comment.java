@@ -4,12 +4,14 @@ import com.sparta.javafeed.enums.ErrorType;
 import com.sparta.javafeed.enums.UserRole;
 import com.sparta.javafeed.exception.CustomException;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 public class Comment extends Timestamped {
 
     @Id

@@ -111,19 +111,19 @@ public class UserService {
     public void updatePassword(PasswordUpdateDto requestDto, String accountId) {
         User byAccountId = this.findByAccountId(accountId);
 
-        // 기존 패스워드가 맞는지 확인
-        if(!passwordEncoder.matches(requestDto.getCurrentPassword(), byAccountId.getPassword())){
-            throw new CustomException(ErrorType.INVALID_PASSWORD);
-        }
-
         // 새로운 패스워드가 기존 패스워드와 같은지 확인
         if (passwordEncoder.matches(requestDto.getNewPassword(), byAccountId.getPassword())) {
             throw new CustomException(ErrorType.DUPLICATE_PASSWORD);
         }
 
-        String encodedNewPassword = passwordEncoder.encode(requestDto.getNewPassword());
+        // 기존 패스워드가 맞는지 확인
+        if(!passwordEncoder.matches(requestDto.getCurrentPassword(), byAccountId.getPassword())){
+            String encodedNewPassword = passwordEncoder.encode(requestDto.getNewPassword());
 
-        byAccountId.updatePassword(encodedNewPassword);
+            byAccountId.updatePassword(encodedNewPassword);
+        } else {
+            throw new CustomException(ErrorType.INVALID_PASSWORD);
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ import com.sparta.javafeed.dto.UserInfoRequestDto;
 import com.sparta.javafeed.enums.UserRole;
 import com.sparta.javafeed.enums.UserStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ import java.util.List;
 @Setter
 @Table(name="User")
 @NoArgsConstructor
+@AllArgsConstructor
 public class User extends Timestamped {
 
     @Id

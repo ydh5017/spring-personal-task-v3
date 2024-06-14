@@ -5,6 +5,7 @@ import com.sparta.javafeed.enums.ErrorType;
 import com.sparta.javafeed.enums.UserRole;
 import com.sparta.javafeed.exception.CustomException;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +17,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="Newsfeed")
 public class Newsfeed extends Timestamped {
 
