@@ -133,7 +133,7 @@ public class UserService {
      * @param refreshToken 토큰
      */
     @Transactional
-    public void loout(User user, String accessToken, String refreshToken) {
+    public void logout(User user, String accessToken, String refreshToken) {
         if (user==null) {
             throw new CustomException(ErrorType.LOGGED_OUT_TOKEN);
         }

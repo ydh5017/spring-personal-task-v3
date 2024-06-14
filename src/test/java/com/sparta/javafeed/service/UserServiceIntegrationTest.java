@@ -171,12 +171,12 @@ class UserServiceIntegrationTest {
     @Test
     @Order(9)
     @DisplayName("로그아웃")
-    void loout() {
+    void logout() {
         // given
         user.saveRefreshToken("refreshToken");
 
         // when
-        userService.loout(user, "accessToken", "refreshToken");
+        userService.logout(user, "accessToken", "refreshToken");
 
         // then
         user = userService.findByEmail(user.getEmail());

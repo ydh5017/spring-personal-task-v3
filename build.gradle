@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.0'
     id 'io.spring.dependency-management' version '1.1.5'
+    id 'jacoco'
 }
 
 group = 'com.sparta'
@@ -67,4 +68,56 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy 'jacocoTestReport' // test가 끝나면 jacocoTestReport 동작
+}
+
+// jacoco report 설정
+jacocoTestReport {
+    reports {
+        // html로 report 생성하기
+        // 빌드경로/jacoco/report.html 폴더 내부로 경로 설정
+        html.destination file("jacoco/report.html")
+    }
+    // 커버리지 보고서 제외 범위 설정
+    getClassDirectories().setFrom(
+            files(classDirectories.files.collect {
+                fileTree(dir: it, exclude: [
+                        '**/dto', // dto package 내부는 제외
+                        '**/config',
+                        '**/util',
+                        "**/jwt"
+                ])
+            })
+    )
+
+    // jacocoTestReport가 끝나면 jacocoTestCoverageVerification 동작
+    finalizedBy 'jacocoTestCoverageVerification'
+}
+
+// jacoco 커버리지 검증 설정
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            enabled = true // 커버리지 적용 여부
+            element = 'CLASS' // 커버리지 적용 단위
+
+            // 라인 커버리지 설정
+            // 적용 대상 전체 소스 코드들을 한줄 한줄 따졌을 때 테스트 코드가 작성되어 있는 줄의 빈도
+            // 테스트 코드가 작성되어 있는 비율이 60% 이상이어야 함
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.60
+            }
+
+            // 브랜치 커버리지 설정
+            // if-else 등을 활용하여 발생되는 분기들 중 테스트 코드가 작성되어 있는 빈도
+            // 테스트 코드가 작성되어 있는 비율이 60% 이상이어야 함
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.60
+            }
+        }
+    }
 }

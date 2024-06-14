@@ -64,7 +64,7 @@ public class UserController {
         String accessToken = jwtUtil.getAccessTokenFromHeader(request);
         String refreshToken = jwtUtil.getRefreshTokenFromHeader(request);
 
-        userService.loout(details.getUser(), accessToken, refreshToken);
+        userService.logout(details.getUser(), accessToken, refreshToken);
 
         return ResponseEntity.ok(new ResponseStatusDto(ResponseStatus.LOGOUT_SUCCESS));
     }
