@@ -7,12 +7,14 @@ import java.time.LocalDateTime;
 
 @Getter
 public class NewsfeedResponseDto {
+    private Long id;
     private String accountId;
     private String title;
     private String description;
     private LocalDateTime createdAt;
 
     public NewsfeedResponseDto(Newsfeed newsfeed) {
+        this.id = newsfeed.getId();
         this.accountId = newsfeed.getUser().getAccountId();
         this.title = newsfeed.getTitle();
         this.description = newsfeed.getDescription();

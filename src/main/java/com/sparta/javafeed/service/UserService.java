@@ -117,7 +117,7 @@ public class UserService {
         }
 
         // 기존 패스워드가 맞는지 확인
-        if(!passwordEncoder.matches(requestDto.getCurrentPassword(), byAccountId.getPassword())){
+        if(passwordEncoder.matches(requestDto.getCurrentPassword(), byAccountId.getPassword())){
             String encodedNewPassword = passwordEncoder.encode(requestDto.getNewPassword());
 
             byAccountId.updatePassword(encodedNewPassword);
