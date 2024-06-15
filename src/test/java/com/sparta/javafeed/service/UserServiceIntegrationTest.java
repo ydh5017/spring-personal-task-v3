@@ -10,12 +10,15 @@ import com.sparta.javafeed.util.S3Util;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -48,7 +51,7 @@ class UserServiceIntegrationTest {
     void signupUser() {
         // given
         SignupRequestDto requestDto =new SignupRequestDto(
-                "test111111", "1q2w3e4r!@#$", "test", "test@gmail.com");
+                "test111111", "1q2w3e4r!@#$", "test", "test111111@gmail.com");
 
         // when
         SignupResponseDto responseDto = userService.signupUser(requestDto);
@@ -185,6 +188,8 @@ class UserServiceIntegrationTest {
     }
 
     @Test
+    @Order(10)
+    @DisplayName("회원 탈퇴")
     void deactiveUser() {
         // given
         PasswordReqeustDto reqeust = new PasswordReqeustDto("1qaz2wsx3edc!@#");
@@ -196,5 +201,10 @@ class UserServiceIntegrationTest {
         user = userService.findByEmail(user.getEmail());
         assertNotNull(user);
         assertEquals(UserStatus.DEACTIVATE, user.getUserStatus());
+    }
+
+    @Test
+    void deleteUser() {
+        userRepository.delete(user);
     }
 }

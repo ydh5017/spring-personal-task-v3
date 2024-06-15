@@ -12,11 +12,13 @@ import com.sparta.javafeed.repository.UserRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -47,7 +49,7 @@ class CommentServiceIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        user = userService.findByAccountId("test111111");
+        user = userService.findByAccountId("test222222");
         user.updateUserStatus(UserStatus.ACTIVE);
         userRepository.save(user);
     }
