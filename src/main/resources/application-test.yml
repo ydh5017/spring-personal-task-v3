@@ -25,9 +25,9 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    password: ${DB_PASSWORD}
-    username: ${DB_USERNAME}
-    url: jdbc:mysql://${DB_HOST}:3306/javafeed_testdb
+    password: 1234
+    username: root
+    url: jdbc:mysql://${DB_HOST}:3307/javafeed_testdb
 
 jwt:
   secret:
