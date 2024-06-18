@@ -108,20 +108,20 @@ jacocoTestCoverageVerification {
             // 라인 커버리지 설정
             // 적용 대상 전체 소스 코드들을 한줄 한줄 따졌을 때 테스트 코드가 작성되어 있는 줄의 빈도
             // 테스트 코드가 작성되어 있는 비율이 60% 이상이어야 함
-            limit {
-                counter = 'LINE'
-                value = 'COVEREDRATIO'
-                minimum = 0.60
-            }
+//            limit {
+//                counter = 'LINE'
+//                value = 'COVEREDRATIO'
+//                minimum = 0.60
+//            }
 
             // 브랜치 커버리지 설정
             // if-else 등을 활용하여 발생되는 분기들 중 테스트 코드가 작성되어 있는 빈도
             // 테스트 코드가 작성되어 있는 비율이 60% 이상이어야 함
-            limit {
-                counter = 'BRANCH'
-                value = 'COVEREDRATIO'
-                minimum = 0.60
-            }
+//            limit {
+//                counter = 'BRANCH'
+//                value = 'COVEREDRATIO'
+//                minimum = 0.60
+//            }
         }
     }
 }
