@@ -58,7 +58,7 @@ class NewsfeedTest {
         User user = setUser();
 
         //when, then
-        newsfeed.userValidate(user);
+        assertDoesNotThrow(()-> newsfeed.userValidate(user));
     }
 
     @Test

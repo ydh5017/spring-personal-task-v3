@@ -85,7 +85,7 @@ class CommentControllerTest {
         String commentInfo = objectMapper.writeValueAsString(requestDto);
 
         // when, then
-        mockMvc.perform(post("/posts/1/comments")
+        mockMvc.perform(post("/posts/{postId}/comments", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(commentInfo)
                 .principal(mockPrincipal))
@@ -97,7 +97,7 @@ class CommentControllerTest {
     @DisplayName("댓글 목록 조회 성공")
     void getCommentsSuccess() throws Exception {
         // when, then
-        mockMvc.perform(get("/posts/1/comments"))
+        mockMvc.perform(get("/posts/{postId}/comments", 1))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
@@ -112,7 +112,7 @@ class CommentControllerTest {
         String commentInfo = objectMapper.writeValueAsString(requestDto);
 
         // when, then
-        mockMvc.perform(put("/posts/1/comments/1")
+        mockMvc.perform(put("/posts/{postId}/comments/{commentId}", 1, 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(commentInfo)
                 .principal(mockPrincipal))
@@ -127,7 +127,7 @@ class CommentControllerTest {
         mockUserSetup();
 
         // when, then
-        mockMvc.perform(delete("/posts/1/comments/1")
+        mockMvc.perform(delete("/posts/{postId}/comments/{commentId}", 1, 1)
                 .principal(mockPrincipal))
                 .andExpect(status().isOk())
                 .andDo(print());

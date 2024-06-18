@@ -117,7 +117,7 @@ class NewsfeedControllerTest {
         String newsfeedInfo = objectMapper.writeValueAsString(requestDto);
 
         // when, then
-        mockMvc.perform(put("/posts/1")
+        mockMvc.perform(put("/posts/{id}", 1)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(newsfeedInfo)
                 .principal(mockPrincipal))
@@ -132,7 +132,7 @@ class NewsfeedControllerTest {
         mockUserSetup();
 
         // when, then
-        mockMvc.perform(delete("/posts/1")
+        mockMvc.perform(delete("/posts/{id}", 1)
                 .principal(mockPrincipal))
                 .andExpect(status().isOk())
                 .andDo(print());
